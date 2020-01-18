@@ -1,0 +1,36 @@
+.block-title {
+    background-color: #0c4f99;
+    color: white;
+    padding: 6px 16px;
+    max-width: 250px;
+    position: relative;
+}
+
+.block-title.inline {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.block-title:after {
+    content : ' ';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 16px 16px 0;
+    border-color: transparent #ffffff transparent transparent;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.block-title:before {
+    content : ' ';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 0 0 16px;
+    border-color: transparent transparent transparent #ffffff;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+}
