@@ -1,9 +1,12 @@
-import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS } from "./characterActions";
+import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST } from "./characterActions";
 import { State } from "../models/State";
 
 export const initialState: State = {
     character: {},
-    loading: false
+    loading: false,
+    toastMessage: {
+        isOpen: false
+    }
 };
 
 export const characterReducer = (state: State, action: Action) => {
@@ -29,8 +32,20 @@ export const characterReducer = (state: State, action: Action) => {
                 character: {
                     ...state.character,
                     Id: action.payload
+                },
+                toastMessage: {
+                    isOpen: true,
+                    message: `Ficha de personaje guardada con éxito`
                 }
             };
+        case CLOSE_TOAST: 
+            return {
+                ...state,
+                toastMessage: {
+                    ...state.toastMessage,
+                    isOpen: false
+                }
+            }
         default:
             return state;
     }

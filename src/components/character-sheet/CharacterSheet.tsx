@@ -3,12 +3,12 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../header/Header';
 import SaveIcon from '@material-ui/icons/Save';
+import CloseIcon from '@material-ui/icons/Close';
 import CharacterStats from '../character-stats/CharacterStats';
 import CharacterGeneralData from '../character-general-data/CharacterGeneralData';
 import { initialState, characterReducer } from '../../core/context/characterReducer';
 import { CharacterProvider } from '../../core/context/CharacterContext';
-import { Button } from '@material-ui/core';
-import DatabaseService from '../../core/services/DatabaseService';
+import { Button, Snackbar, IconButton } from '@material-ui/core';
 import createActions from '../../core/context/characterActions';
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +38,10 @@ const CharacterSheet: React.FC = () => {
         actions.saveCharacterToDb(state.character);
     }
 
+    const closeToast = () => {
+        actions.closeToast();
+      };
+
     return (
         <CharacterProvider value={{state, dispatch}}>
             <Container fixed className={classes.characterSheet}>
@@ -46,7 +50,6 @@ const CharacterSheet: React.FC = () => {
                     
                     <CharacterGeneralData/>
                     <CharacterStats />
-
                     <Button 
                         className={classes.ctaButton} 
                         variant="contained"
@@ -60,6 +63,21 @@ const CharacterSheet: React.FC = () => {
                 </form>
             
             </Container>  
+
+            <Snackbar
+                open={state.toastMessage.isOpen}
+                autoHideDuration={6000}
+                onClose={closeToast}
+                message={state.toastMessage.message}
+                action={
+                    <React.Fragment>
+                      <IconButton size="small" aria-label="close" color="inherit" onClick={closeToast}>
+                        <CloseIcon fontSize="small" />
+                      </IconButton>
+                    </React.Fragment>
+                  }
+                
+            />
         </CharacterProvider>
 
             
