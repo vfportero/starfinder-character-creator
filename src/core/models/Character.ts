@@ -10,6 +10,18 @@ export interface Character {
     Alignment?: CharacterAlignment;
     God?: string;
     Player?: string;
+
+    Strength?: CharacterStat;
+    Dexterity?: CharacterStat;
+    Constitution?: CharacterStat;
+    Intelligence?: CharacterStat;
+    Wisdom?: CharacterStat;
+    Charisma?: CharacterStat;
+}
+
+export interface CharacterStat {
+    Value: number;
+    Modifier: string;
 }
 
 export enum CharacterSize {

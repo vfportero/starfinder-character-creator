@@ -25,12 +25,12 @@ const CharacterStats: React.FC = (model) => {
         <Grid item xs={12} md={6}>
             <BlockTitle Title="Puntuaciones de característica" />
             <div className={classes.inner}>
-                <CharacterStat StatName="FUE"/>
-                <CharacterStat StatName="DES"/>
-                <CharacterStat StatName="CON"/>
-                <CharacterStat StatName="INT"/>
-                <CharacterStat StatName="SAB"/>
-                <CharacterStat StatName="CAR"/>
+                <CharacterStat StatName="Strength"/>
+                <CharacterStat StatName="Dexterity"/>
+                <CharacterStat StatName="Constitution"/>
+                <CharacterStat StatName="Intelligence"/>
+                <CharacterStat StatName="Wisdom"/>
+                <CharacterStat StatName="Charisma"/>
             </div>
         </Grid>
     </Grid>

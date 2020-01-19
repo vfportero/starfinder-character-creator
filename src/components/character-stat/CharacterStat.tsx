@@ -1,6 +1,8 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useContext } from 'react';
 import { Grid, makeStyles, TextField } from '@material-ui/core';
 import { Character } from '../../core/models/Character';
+import CharacterContext from '../../core/context/CharacterContext';
+import { UpdateCharacterAction } from '../../core/reducers/characterActions';
 
 interface CharacterStatModel {
     StatName: string;
@@ -38,9 +40,9 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
       }));
 
     const classes = useStyles();
-    const [state, setState] = useState<string>('');
-
-
+    
+    const {state, dispatch} = useContext<any>(CharacterContext);
+    
     let calculateStatModifier = (stat: string) : string => {
         if (stat) {
             try {
@@ -57,22 +59,43 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
         
     }
 
-    let handleStatChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setState(calculateStatModifier(e.target.value));
+    let handleStatChange = (e: { target: { value: string; }; }) => {
+        dispatch(new UpdateCharacterAction(model.StatName, {
+            Value: e.target.value,
+            Modifier: calculateStatModifier(e.target.value)
+        }));
+    }
+
+    let getStatAbbreviation = () => {
+        switch(model.StatName) {
+            case 'Strength':
+                return 'FUE';
+            case 'Dexterity':
+                return 'DES';
+            case 'Constitution':
+                return 'CON';
+            case 'Intelligence':
+                return 'INT';
+            case 'Wisdom':
+                return 'SAB';
+            case 'Charisma':
+                return 'CAR';
+        }
+        return '';
     }
 
       
   return (
 
     <div className={classes.root}>
-        <div className={classes.name}>{model.StatName}</div>
+        <div className={classes.name}>{getStatAbbreviation()}</div>
         <TextField 
                 variant="outlined"
                 type="number"
                 size="small"
                 color="secondary"
                 className={classes.statValue}
-                onChange={handleStatChange}
+                onBlur={handleStatChange}
                 InputProps={{
                     classes: {
                         root: classes.mainStatValue
@@ -85,7 +108,7 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
                 color="secondary"
                 disabled
                 className={classes.statValue}
-                value={state}
+                value={state[model.StatName]?.Modifier}
                 InputProps={{
                     classes: {
                         root: classes.mainStatValue
@@ -105,48 +128,6 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
                 className={classes.statValue}
             />
     </div>
-
-    // <Grid container spacing={2} className={classes.root}>
-    //     <Grid item xs={2}>
-    //         <div className={classes.name}>{model.StatName}</div>
-    //     </Grid>
-    //     <Grid item xs={2}>
-    //         <TextField 
-    //             variant="outlined"
-    //             type="number"
-    //             size="small"
-    //             color="secondary"
-    //             InputProps={{
-    //                 classes: {
-    //                     root: classes.mainStat
-    //                 } 
-    //             }}
-    //         />
-    //     </Grid>
-    //     <Grid item xs={2}>
-    //         <TextField 
-    //             variant="outlined"
-    //             size="small"
-    //             color="secondary"
-    //             disabled
-    //             className={classes.mainStat}
-    //         />
-    //     </Grid>
-    //     <Grid item xs={2}>
-    //         <TextField 
-    //             variant="outlined"
-    //             size="small"
-    //             disabled
-    //         />
-    //     </Grid>
-    //     <Grid item xs={2}>
-    //         <TextField 
-    //             variant="outlined"
-    //             size="small"
-    //             disabled
-    //         />
-    //     </Grid>
-    // </Grid>
   );
 }
 
