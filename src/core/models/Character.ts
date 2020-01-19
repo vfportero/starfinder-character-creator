@@ -1,4 +1,5 @@
 export interface Character {
+    Id?: string;
     Name?: string;
     ClassAndLevel?: string,
     Race?: string;

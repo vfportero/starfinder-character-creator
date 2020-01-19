@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, makeStyles, TextField } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import BlockTitle from '../block-title/BlockTitle';
 import CharacterStat from '../character-stat/CharacterStat';
 
-const CharacterStats: React.FC = (model) => {
+const CharacterStats: React.FC = () => {
 
     const useStyles = makeStyles(theme => ({
         statsBlock: {

@@ -3,7 +3,7 @@ import { Grid, TextField, InputLabel, Select, MenuItem, makeStyles } from '@mate
 import BlockTitle from '../block-title/BlockTitle';
 import { CharacterSize, CharacterAlignment } from '../../core/models/Character';
 import CharacterContext from '../../core/context/CharacterContext';
-import { UpdateCharacterAction } from '../../core/reducers/characterActions';
+import createActions from '../../core/context/characterActions';
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,9 +17,12 @@ const CharacterGeneralData: React.FC = () => {
     const classes = useStyles();
 
     const {state, dispatch} = useContext<any>(CharacterContext);
+    const actions = createActions(dispatch);
+
+    const character = state.character;    
     
     let handleStateChange = (name: string, value: any) => {
-        dispatch(new UpdateCharacterAction(name, value));
+        actions.setCharacterProperty(name, value);
     }
 
     let handleTextboxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,21 +42,21 @@ const CharacterGeneralData: React.FC = () => {
                 <BlockTitle Title="Información general" />
             </Grid>
             <Grid item xs={6} md={3}>
-                <TextField name="Name" defaultValue={state.Name} onChange={handleTextboxChange} label="Nombre del PJ" className={classes.textField} fullWidth/>
+                <TextField name="Name" defaultValue={character.Name} onChange={handleTextboxChange} label="Nombre del PJ" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={6} md={3}>
-                <TextField name="ClassAndLevel" onChange={handleTextboxChange} defaultValue={state.ClassAndLevel} label="Clase/Nivel" className={classes.textField} fullWidth/>
+                <TextField name="ClassAndLevel" onChange={handleTextboxChange} defaultValue={character.ClassAndLevel} label="Clase/Nivel" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={6} md={3}>
-                <TextField name="Race" onChange={handleTextboxChange} defaultValue={state.Race} label="Raza" className={classes.textField} fullWidth/>
+                <TextField name="Race" onChange={handleTextboxChange} defaultValue={character.Race} label="Raza" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={6} md={3}>
-                <TextField name="Thematic" onChange={handleTextboxChange} defaultValue={state.Thematic} label="Temática" className={classes.textField} fullWidth/>
+                <TextField name="Thematic" onChange={handleTextboxChange} defaultValue={character.Thematic} label="Temática" className={classes.textField} fullWidth/>
             </Grid>
 
             <Grid item xs={6} md={2}>
-                <InputLabel id="state-size">Tamaño</InputLabel>
-                <Select name="Size" onChange={handleSelectChange} defaultValue={state.Size} labelId="state-size" fullWidth>
+                <InputLabel id="character-size">Tamaño</InputLabel>
+                <Select name="Size" onChange={handleSelectChange} defaultValue={character.Size} labelId="character-size" fullWidth>
                     <MenuItem value={CharacterSize.Fine}>Minúsculo</MenuItem>
                     <MenuItem value={CharacterSize.Diminutive}>Diminuto</MenuItem>
                     <MenuItem value={CharacterSize.Tiny}>Menudo</MenuItem>
@@ -66,18 +69,18 @@ const CharacterGeneralData: React.FC = () => {
                 </Select>
             </Grid>
             <Grid item xs={6} md={3}>
-                <TextField name="Speed" onChange={handleTextboxChange} defaultValue={state.Speed} label="Velocidad" className={classes.textField} fullWidth/>
+                <TextField name="Speed" onChange={handleTextboxChange} defaultValue={character.Speed} label="Velocidad" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={3} md={1}>
-                <TextField name="Sex" onChange={handleTextboxChange} defaultValue={state.Sex} label="Sexo" className={classes.textField} fullWidth/>
+                <TextField name="Sex" onChange={handleTextboxChange} defaultValue={character.Sex} label="Sexo" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={9} md={6}>
-                <TextField name="HomeWorld" onChange={handleTextboxChange} defaultValue={state.HomeWorld} label="Mundo natal" className={classes.textField} fullWidth/>
+                <TextField name="HomeWorld" onChange={handleTextboxChange} defaultValue={character.HomeWorld} label="Mundo natal" className={classes.textField} fullWidth/>
             </Grid>
 
             <Grid item xs={9} md={2}>
-                <InputLabel id="state-alignment">Alineamiento</InputLabel>
-                <Select name="Alignment" onChange={handleSelectChange} defaultValue={state.Alignment} labelId="state-alignment" fullWidth>
+                <InputLabel id="character-alignment">Alineamiento</InputLabel>
+                <Select name="Alignment" onChange={handleSelectChange} defaultValue={character.Alignment} labelId="character-alignment" fullWidth>
                     <MenuItem value={CharacterAlignment.LawfulGood}>Legal Bueno</MenuItem>
                     <MenuItem value={CharacterAlignment.LawfulNeutral}>Legal Neutral</MenuItem>
                     <MenuItem value={CharacterAlignment.LawfulEvil}>Legal Maligno</MenuItem>
@@ -90,10 +93,10 @@ const CharacterGeneralData: React.FC = () => {
                 </Select>
             </Grid>
             <Grid item xs={6} md={4}>
-                <TextField name="God" onChange={handleTextboxChange} defaultValue={state.God} label="Dios" className={classes.textField} fullWidth/>
+                <TextField name="God" onChange={handleTextboxChange} defaultValue={character.God} label="Dios" className={classes.textField} fullWidth/>
             </Grid>
             <Grid item xs={6} md={6}>
-                <TextField name="Player" onChange={handleTextboxChange} defaultValue={state.Player} label="Jugador" className={classes.textField} fullWidth/>
+                <TextField name="Player" onChange={handleTextboxChange} defaultValue={character.Player} label="Jugador" className={classes.textField} fullWidth/>
             </Grid>
 
         </Grid>

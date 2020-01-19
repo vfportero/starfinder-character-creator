@@ -5,10 +5,11 @@ import Header from '../header/Header';
 import SaveIcon from '@material-ui/icons/Save';
 import CharacterStats from '../character-stats/CharacterStats';
 import CharacterGeneralData from '../character-general-data/CharacterGeneralData';
-import { initialCharacter, characterReducer } from '../../core/reducers/characterReducer';
+import { initialState, characterReducer } from '../../core/context/characterReducer';
 import { CharacterProvider } from '../../core/context/CharacterContext';
 import { Button } from '@material-ui/core';
 import DatabaseService from '../../core/services/DatabaseService';
+import createActions from '../../core/context/characterActions';
 
 const useStyles = makeStyles(theme => ({
     characterSheet: {
@@ -29,10 +30,12 @@ const useStyles = makeStyles(theme => ({
 const CharacterSheet: React.FC = () => {
 
     const classes = useStyles();
-    const [state, dispatch] = useReducer(characterReducer, initialCharacter);
+    const [state, dispatch] = useReducer(characterReducer, initialState);
+    const actions = createActions(dispatch);
+
 
     let save = () => {
-        DatabaseService.commit(state);
+        actions.saveCharacterToDb(state.character);
     }
 
     return (
@@ -51,6 +54,7 @@ const CharacterSheet: React.FC = () => {
                         startIcon={<SaveIcon />}
                         size="large"
                         onClick={save}
+                        disabled={state.loading}
                     >
                     Guardar</Button>
                 </form>

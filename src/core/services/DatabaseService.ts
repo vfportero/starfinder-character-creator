@@ -3,17 +3,24 @@ import * as firebase from 'firebase';
 
 class DatabaseService {
     
-    firebaseRepository!: firebase.database.Reference;
+    firebaseRepository!: firebase.firestore.DocumentData;
 
     init() {
-        this.firebaseRepository = firebase.database().ref('characters');
+        this.firebaseRepository = firebase.firestore().collection('characters');
     }
     
-    commit(character: Character) {
+    async commit(character: Character) : Promise<string> {
         if (!this.firebaseRepository) {
             this.init();    
         }
-        this.firebaseRepository.push(character);
+        if (!character.Id) {
+            return (await this.firebaseRepository.add(character)).id;
+        } 
+        
+        this.firebaseRepository.doc(character.Id).update(character);
+        return character.Id;
+        
+        
     }
 }
 

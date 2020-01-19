@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useState, useContext } from 'react';
-import { Grid, makeStyles, TextField } from '@material-ui/core';
-import { Character } from '../../core/models/Character';
+import React, { useContext } from 'react';
+import { makeStyles, TextField } from '@material-ui/core';
 import CharacterContext from '../../core/context/CharacterContext';
-import { UpdateCharacterAction } from '../../core/reducers/characterActions';
+import createActions from '../../core/context/characterActions';
 
 interface CharacterStatModel {
     StatName: string;
@@ -42,6 +41,8 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
     const classes = useStyles();
     
     const {state, dispatch} = useContext<any>(CharacterContext);
+    const actions = createActions(dispatch);
+    const character = state.character;
     
     let calculateStatModifier = (stat: string) : string => {
         if (stat) {
@@ -60,10 +61,11 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
     }
 
     let handleStatChange = (e: { target: { value: string; }; }) => {
-        dispatch(new UpdateCharacterAction(model.StatName, {
+        actions.setCharacterProperty(model.StatName, 
+        {
             Value: e.target.value,
             Modifier: calculateStatModifier(e.target.value)
-        }));
+        });
     }
 
     let getStatAbbreviation = () => {
@@ -108,7 +110,7 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
                 color="secondary"
                 disabled
                 className={classes.statValue}
-                value={state[model.StatName]?.Modifier}
+                value={character[model.StatName]?.Modifier}
                 InputProps={{
                     classes: {
                         root: classes.mainStatValue
