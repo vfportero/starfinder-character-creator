@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
 import * as firebase from 'firebase';
-import * as firebaseConfig from './firebaseconfig';
+import firebaseConfig from './firebaseconfig';
 
 
 const App: React.FC = () => {

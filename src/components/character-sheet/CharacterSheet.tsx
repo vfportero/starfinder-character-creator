@@ -1,16 +1,14 @@
-import React, { useState, ChangeEvent, useContext, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
-import BlockTitle from '../block-title/BlockTitle';
-import { CharacterSize, CharacterAlignment, Character } from '../../core/models/Character';
 import Header from '../header/Header';
 import SaveIcon from '@material-ui/icons/Save';
 import CharacterStats from '../character-stats/CharacterStats';
 import CharacterGeneralData from '../character-general-data/CharacterGeneralData';
 import { initialCharacter, characterReducer } from '../../core/reducers/characterReducer';
 import { CharacterProvider } from '../../core/context/CharacterContext';
-
+import { Button } from '@material-ui/core';
+import DatabaseService from '../../core/services/DatabaseService';
 
 const useStyles = makeStyles(theme => ({
     characterSheet: {
@@ -32,10 +30,9 @@ const CharacterSheet: React.FC = () => {
 
     const classes = useStyles();
     const [state, dispatch] = useReducer(characterReducer, initialCharacter);
-    
 
     let save = () => {
-        console.log(state);
+        DatabaseService.commit(state);
     }
 
     return (

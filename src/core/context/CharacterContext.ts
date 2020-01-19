@@ -1,5 +1,4 @@
 import React from "react";
-import { Character } from '../models/Character';
 
 const CharacterContext = React.createContext({});
 export const CharacterProvider = CharacterContext.Provider;
