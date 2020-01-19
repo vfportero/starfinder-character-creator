@@ -2,7 +2,7 @@
     background-color: #0c4f99;
     color: white;
     padding: 6px 16px;
-    max-width: 250px;
+    display: inline-block;
     position: relative;
 }
 

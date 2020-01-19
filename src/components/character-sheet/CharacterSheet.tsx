@@ -6,6 +6,7 @@ import BlockTitle from '../block-title/BlockTitle';
 import { CharacterSize, CharacterAlignment, Character } from '../../core/models/Character';
 import Header from '../header/Header';
 import SaveIcon from '@material-ui/icons/Save';
+import CharacterStats from '../character-stats/CharacterStats';
 
 
 const useStyles = makeStyles(theme => ({
@@ -118,6 +119,8 @@ const CharacterSheet: React.FC = () => {
                     </Grid>
 
                 </Grid>
+
+                <CharacterStats />
 
                 <Button 
                     className={classes.ctaButton} 

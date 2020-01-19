@@ -9,7 +9,8 @@ const theme = createMuiTheme({
       contrastText: 'white',
     },
     secondary: {
-      main: '#19857b',
+      main: '#000',
+      contrastText: 'white'
     },
     error: {
       main: red.A400,
@@ -19,7 +20,8 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'Audiowide'
+    fontFamily: 'Audiowide',
+    fontSize: 13
   }
 });
 

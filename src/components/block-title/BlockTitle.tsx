@@ -1,11 +1,11 @@
 import React from 'react';
 import './BlockTitle.css';
 
-interface BlockTitle {
+interface BlockTitleModel {
   Title: string;
 }
 
-const BlockTitle: React.FC<BlockTitle> = (model) => {
+const BlockTitle: React.FC<BlockTitleModel> = (model) => {
 
   return (
     <div className='block-title'>  
