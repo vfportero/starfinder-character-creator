@@ -4,11 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Header from '../header/Header';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import CharacterStats from '../character-stats/CharacterStats';
 import CharacterGeneralData from '../character-general-data/CharacterGeneralData';
 import { initialState, characterReducer } from '../../core/context/characterReducer';
 import { CharacterProvider } from '../../core/context/CharacterContext';
-import { Button, Snackbar, IconButton } from '@material-ui/core';
+import { Button, Snackbar, IconButton, ButtonGroup } from '@material-ui/core';
 import createActions from '../../core/context/characterActions';
 
 const useStyles = makeStyles(theme => ({
@@ -50,16 +51,19 @@ const CharacterSheet: React.FC = () => {
                     
                     <CharacterGeneralData/>
                     <CharacterStats />
-                    <Button 
-                        className={classes.ctaButton} 
-                        variant="contained"
-                        color="primary" 
-                        startIcon={<SaveIcon />}
-                        size="large"
-                        onClick={save}
-                        disabled={state.loading}
-                    >
-                    Guardar</Button>
+
+                    <ButtonGroup color="primary" variant="contained" aria-label="primary button group" className={classes.ctaButton} >
+                        <Button 
+                            startIcon={<SaveIcon />}
+                            onClick={save}
+                            disabled={state.loading}
+                        >
+                        Guardar</Button>
+                        <Button 
+                            startIcon={<GetAppIcon />}
+                            disabled
+                        > Cargar (TODO)</Button>
+                    </ButtonGroup>
                 </form>
             
             </Container>  
