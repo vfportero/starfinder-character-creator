@@ -1,4 +1,4 @@
-import { Character, CharacterAlignment } from "./Character";
+import { Character, CharAlignment } from "./Character";
 
 export interface State {
     character: Character,

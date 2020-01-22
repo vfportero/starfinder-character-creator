@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import CharacterContext from '../../core/context/CharacterContext';
 import createActions from '../../core/context/characterActions';
-import { CharacterStatName } from '../../core/models/Character';
+import { CharStatName } from '../../core/models/Character';
 import CharacterService from '../../core/services/CharacterService';
 
 interface CharacterStatModel {
-    StatName: CharacterStatName;
+    StatName: CharStatName;
 }
   
 
@@ -50,22 +50,28 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
     let handleStatChange = (e: any) => {
         if (e.target.value) {
             actions.setCharacterStat(model.StatName, e.target.value);
+            
+            switch(model.StatName) {
+                case CharStatName.Dexterity:
+                    actions.setCharacterIniciative();
+                    break;
+            }
         }
     }
 
     let getStatAbbreviation = () => {
         switch(model.StatName) {
-            case 'Strength':
+            case CharStatName.Strength:
                 return 'FUE';
-            case 'Dexterity':
+            case CharStatName.Dexterity:
                 return 'DES';
-            case 'Constitution':
+            case CharStatName.Constitution:
                 return 'CON';
-            case 'Intelligence':
+            case CharStatName.Intelligence:
                 return 'INT';
-            case 'Wisdom':
+            case CharStatName.Wisdom:
                 return 'SAB';
-            case 'Charisma':
+            case CharStatName.Charisma:
                 return 'CAR';
         }
         return '';

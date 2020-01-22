@@ -4,28 +4,35 @@ export interface Character {
     ClassAndLevel?: string,
     Race?: string;
     Thematic?: string;
-    Size?: CharacterSize;
+    Size?: CharSize;
     Speed?: number;
     Sex?: string;
     HomeWorld?: string;
-    Alignment?: CharacterAlignment;
+    Alignment?: CharAlignment;
     God?: string;
     Player?: string;
 
-    Strength?: CharacterStat;
-    Dexterity?: CharacterStat;
-    Constitution?: CharacterStat;
-    Intelligence?: CharacterStat;
-    Wisdom?: CharacterStat;
-    Charisma?: CharacterStat;
+    Strength?: CharStat;
+    Dexterity?: CharStat;
+    Constitution?: CharStat;
+    Intelligence?: CharStat;
+    Wisdom?: CharStat;
+    Charisma?: CharStat;
+
+    Initiative?: CharInitiative;
 }
 
-export interface CharacterStat {
+export interface CharInitiative {
+    Total: number;
+    MiscModifier: number;
+}
+
+export interface CharStat {
     Value: number;
     Modifier: number;
 }
 
-export enum CharacterSize {
+export enum CharSize {
     Fine = 'fine', 
     Diminutive = 'diminutive', 
     Tiny = 'tiny',
@@ -37,7 +44,7 @@ export enum CharacterSize {
     Colossal = 'colossal'
 }
 
-export enum CharacterAlignment {
+export enum CharAlignment {
     LawfulGood = 'lawful_good',
     LawfulNeutral = 'lawful_neutral',
     LawfulEvil = 'lawful_evil',
@@ -51,7 +58,7 @@ export enum CharacterAlignment {
     ChaoticEvil = 'chaotic_evil',
 }
 
-export enum CharacterStatName {
+export enum CharStatName {
     Strength = 'Strength',
     Dexterity= 'Dexterity',
     Constitution= 'Constitution',

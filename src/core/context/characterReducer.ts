@@ -1,4 +1,4 @@
-import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST, SET_CHARACTER_STAT } from "./characterActions";
+import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST, SET_CHARACTER_STAT, SET_CHARACTER_INICIATIVE } from "./characterActions";
 import { State } from "../models/State";
 import CharacterService from "../services/CharacterService";
 
@@ -27,11 +27,23 @@ export const characterReducer = (state: State, action: Action) => {
                 character: {
                     ...state.character,
                     [action.payload.stat]: {
-                        Value: action.payload.value,
+                        Value: parseInt(action.payload.value),
                         Modifier: CharacterService.calculateStatModifier(action.payload.value)
                     }
                 }
             };
+        case SET_CHARACTER_INICIATIVE: {
+            return {
+                ...state,
+                character: {
+                    ...state.character,
+                    Initiative: {
+                        MiscModifier: parseInt(action.payload.value ?? 0),
+                        Total: (parseInt(action.payload.value ?? 0)) + (state.character.Dexterity?.Modifier ?? 0)
+                    }
+                }
+            }
+        }
         case SAVE_CHARACTER_TO_DB:
             return {
                 ...state,

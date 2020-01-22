@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext } from 'react';
 import { Grid, TextField, InputLabel, Select, MenuItem, makeStyles } from '@material-ui/core';
 import BlockTitle from '../block-title/BlockTitle';
-import { CharacterSize, CharacterAlignment } from '../../core/models/Character';
+import { CharSize, CharAlignment } from '../../core/models/Character';
 import CharacterContext from '../../core/context/CharacterContext';
 import createActions from '../../core/context/characterActions';
 
@@ -57,15 +57,15 @@ const CharacterGeneralData: React.FC = () => {
             <Grid item xs={6} md={2}>
                 <InputLabel id="character-size">Tamaño</InputLabel>
                 <Select name="Size" onChange={handleSelectChange} defaultValue={character.Size} labelId="character-size" fullWidth>
-                    <MenuItem value={CharacterSize.Fine}>Minúsculo</MenuItem>
-                    <MenuItem value={CharacterSize.Diminutive}>Diminuto</MenuItem>
-                    <MenuItem value={CharacterSize.Tiny}>Menudo</MenuItem>
-                    <MenuItem value={CharacterSize.Small}>Pequeño</MenuItem>
-                    <MenuItem value={CharacterSize.Medium}>Mediano</MenuItem>
-                    <MenuItem value={CharacterSize.Large}>Grande</MenuItem>
-                    <MenuItem value={CharacterSize.Huge}>Enorme</MenuItem>
-                    <MenuItem value={CharacterSize.Gargantuan}>Gargantuesco</MenuItem>
-                    <MenuItem value={CharacterSize.Colossal}>Colosal</MenuItem>
+                    <MenuItem value={CharSize.Fine}>Minúsculo</MenuItem>
+                    <MenuItem value={CharSize.Diminutive}>Diminuto</MenuItem>
+                    <MenuItem value={CharSize.Tiny}>Menudo</MenuItem>
+                    <MenuItem value={CharSize.Small}>Pequeño</MenuItem>
+                    <MenuItem value={CharSize.Medium}>Mediano</MenuItem>
+                    <MenuItem value={CharSize.Large}>Grande</MenuItem>
+                    <MenuItem value={CharSize.Huge}>Enorme</MenuItem>
+                    <MenuItem value={CharSize.Gargantuan}>Gargantuesco</MenuItem>
+                    <MenuItem value={CharSize.Colossal}>Colosal</MenuItem>
                 </Select>
             </Grid>
             <Grid item xs={6} md={3}>
@@ -81,15 +81,15 @@ const CharacterGeneralData: React.FC = () => {
             <Grid item xs={9} md={2}>
                 <InputLabel id="character-alignment">Alineamiento</InputLabel>
                 <Select name="Alignment" onChange={handleSelectChange} defaultValue={character.Alignment} labelId="character-alignment" fullWidth>
-                    <MenuItem value={CharacterAlignment.LawfulGood}>Legal Bueno</MenuItem>
-                    <MenuItem value={CharacterAlignment.LawfulNeutral}>Legal Neutral</MenuItem>
-                    <MenuItem value={CharacterAlignment.LawfulEvil}>Legal Maligno</MenuItem>
-                    <MenuItem value={CharacterAlignment.NeutralGood}>Neutral Bueno</MenuItem>
-                    <MenuItem value={CharacterAlignment.NeutralAboslute}>Neutral Absoluto</MenuItem>
-                    <MenuItem value={CharacterAlignment.NeutralEvil}>Neutral Maligno</MenuItem>
-                    <MenuItem value={CharacterAlignment.ChaoticGood}>Caótico Bueno</MenuItem>
-                    <MenuItem value={CharacterAlignment.ChaoticNeutral}>Caótico Neutral</MenuItem>
-                    <MenuItem value={CharacterAlignment.ChaoticEvil}>Caótico Maligno</MenuItem>
+                    <MenuItem value={CharAlignment.LawfulGood}>Legal Bueno</MenuItem>
+                    <MenuItem value={CharAlignment.LawfulNeutral}>Legal Neutral</MenuItem>
+                    <MenuItem value={CharAlignment.LawfulEvil}>Legal Maligno</MenuItem>
+                    <MenuItem value={CharAlignment.NeutralGood}>Neutral Bueno</MenuItem>
+                    <MenuItem value={CharAlignment.NeutralAboslute}>Neutral Absoluto</MenuItem>
+                    <MenuItem value={CharAlignment.NeutralEvil}>Neutral Maligno</MenuItem>
+                    <MenuItem value={CharAlignment.ChaoticGood}>Caótico Bueno</MenuItem>
+                    <MenuItem value={CharAlignment.ChaoticNeutral}>Caótico Neutral</MenuItem>
+                    <MenuItem value={CharAlignment.ChaoticEvil}>Caótico Maligno</MenuItem>
                 </Select>
             </Grid>
             <Grid item xs={6} md={4}>

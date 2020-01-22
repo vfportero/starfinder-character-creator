@@ -4,6 +4,7 @@
     padding: 6px 16px;
     display: inline-block;
     position: relative;
+    min-width: 200px;
 }
 
 .block-title.inline {

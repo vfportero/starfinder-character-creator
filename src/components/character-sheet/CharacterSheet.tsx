@@ -9,8 +9,9 @@ import CharacterStats from '../character-stats/CharacterStats';
 import CharacterGeneralData from '../character-general-data/CharacterGeneralData';
 import { initialState, characterReducer } from '../../core/context/characterReducer';
 import { CharacterProvider } from '../../core/context/CharacterContext';
-import { Button, Snackbar, IconButton, ButtonGroup } from '@material-ui/core';
+import { Button, Snackbar, IconButton, ButtonGroup, Grid } from '@material-ui/core';
 import createActions from '../../core/context/characterActions';
+import CharacterInitiative from '../character-initiative/CharacterIniciative';
 
 const useStyles = makeStyles(theme => ({
     characterSheet: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginRight: theme.spacing(1),
     },
-    ctaButton: {
+    row: {
         marginTop: 20
     }
   }));
@@ -36,7 +37,8 @@ const CharacterSheet: React.FC = () => {
 
 
     let save = () => {
-        actions.saveCharacterToDb(state.character);
+        console.log(state.character);
+        // actions.saveCharacterToDb(state.character);
     }
 
     const closeToast = () => {
@@ -50,9 +52,16 @@ const CharacterSheet: React.FC = () => {
                 <form noValidate >
                     
                     <CharacterGeneralData/>
-                    <CharacterStats />
+                    <Grid container spacing={2} className={classes.row}>
+                        <Grid item xs={12} md={6}>
+                            <CharacterStats />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <CharacterInitiative />
+                        </Grid>
+                    </Grid>
 
-                    <ButtonGroup color="primary" variant="contained" aria-label="primary button group" className={classes.ctaButton} >
+                    <ButtonGroup color="primary" variant="contained" aria-label="primary button group" className={classes.row} >
                         <Button 
                             startIcon={<SaveIcon />}
                             onClick={save}

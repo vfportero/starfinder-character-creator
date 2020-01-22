@@ -4,14 +4,17 @@ class CharacterService {
         return Math.floor((value / 2) - 5);
     }
 
-    formatStatModifier(modifier: number) : string {
-        try {
-            if (modifier > 0) {
-                return `+${modifier}`;
+    formatStatModifier(modifier?: number) : string {
+        if (modifier) {
+            try {
+                if (modifier > 0) {
+                    return `+${modifier}`;
+                }
+                return modifier.toString();
             }
-            return modifier.toString();
+            catch(ex) {}
         }
-        catch(ex) {}
+        
         return '';
     }
 }
