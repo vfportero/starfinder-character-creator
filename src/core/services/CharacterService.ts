@@ -5,7 +5,7 @@ class CharacterService {
     }
 
     formatStatModifier(modifier?: number) : string {
-        if (modifier) {
+        if (modifier !== undefined && modifier !== null) {
             try {
                 if (modifier > 0) {
                     return `+${modifier}`;
