@@ -1,5 +1,6 @@
-import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST } from "./characterActions";
+import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST, SET_CHARACTER_STAT } from "./characterActions";
 import { State } from "../models/State";
+import CharacterService from "../services/CharacterService";
 
 export const initialState: State = {
     character: {},
@@ -18,6 +19,17 @@ export const characterReducer = (state: State, action: Action) => {
                 character: {
                     ...state.character,
                     [action.payload.propertyName]: action.payload.value
+                }
+            };
+        case SET_CHARACTER_STAT:
+            return {
+                ...state,
+                character: {
+                    ...state.character,
+                    [action.payload.stat]: {
+                        Value: action.payload.value,
+                        Modifier: CharacterService.calculateStatModifier(action.payload.value)
+                    }
                 }
             };
         case SAVE_CHARACTER_TO_DB:

@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import BlockTitle from '../block-title/BlockTitle';
 import CharacterStat from '../character-stat/CharacterStat';
+import { CharacterStatName } from '../../core/models/Character';
 
 const CharacterStats: React.FC = () => {
 
@@ -25,12 +26,12 @@ const CharacterStats: React.FC = () => {
         <Grid item xs={12} md={6}>
             <BlockTitle Title="Puntuaciones de característica" />
             <div className={classes.inner}>
-                <CharacterStat StatName="Strength"/>
-                <CharacterStat StatName="Dexterity"/>
-                <CharacterStat StatName="Constitution"/>
-                <CharacterStat StatName="Intelligence"/>
-                <CharacterStat StatName="Wisdom"/>
-                <CharacterStat StatName="Charisma"/>
+                <CharacterStat StatName={CharacterStatName.Strength}/>
+                <CharacterStat StatName={CharacterStatName.Dexterity}/>
+                <CharacterStat StatName={CharacterStatName.Constitution}/>
+                <CharacterStat StatName={CharacterStatName.Intelligence}/>
+                <CharacterStat StatName={CharacterStatName.Wisdom}/>
+                <CharacterStat StatName={CharacterStatName.Charisma}/>
             </div>
         </Grid>
     </Grid>

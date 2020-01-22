@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import CharacterContext from '../../core/context/CharacterContext';
 import createActions from '../../core/context/characterActions';
+import { CharacterStatName } from '../../core/models/Character';
+import CharacterService from '../../core/services/CharacterService';
 
 interface CharacterStatModel {
-    StatName: string;
+    StatName: CharacterStatName;
 }
   
 
@@ -43,29 +45,12 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
     const {state, dispatch} = useContext<any>(CharacterContext);
     const actions = createActions(dispatch);
     const character = state.character;
-    
-    let calculateStatModifier = (stat: string) : string => {
-        if (stat) {
-            try {
-                const statNumericValue = parseInt(stat);
-                let modifier = Math.floor((statNumericValue / 2) - 5);
-                if (modifier > 0 ) {
-                    return `+${modifier}`;
-                }
-                return modifier.toString();
-            }
-            catch {}            
-        }
-        return '';
-        
-    }
 
-    let handleStatChange = (e: { target: { value: string; }; }) => {
-        actions.setCharacterProperty(model.StatName, 
-        {
-            Value: e.target.value,
-            Modifier: calculateStatModifier(e.target.value)
-        });
+
+    let handleStatChange = (e: any) => {
+        if (e.target.value) {
+            actions.setCharacterStat(model.StatName, e.target.value);
+        }
     }
 
     let getStatAbbreviation = () => {
@@ -110,7 +95,7 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
                 color="secondary"
                 disabled
                 className={classes.statValue}
-                value={character[model.StatName]?.Modifier}
+                value={CharacterService.formatStatModifier(character[model.StatName]?.Modifier)}
                 InputProps={{
                     classes: {
                         root: classes.mainStatValue

@@ -22,7 +22,7 @@ export interface Character {
 
 export interface CharacterStat {
     Value: number;
-    Modifier: string;
+    Modifier: number;
 }
 
 export enum CharacterSize {
@@ -49,4 +49,13 @@ export enum CharacterAlignment {
     ChaoticGood = 'chaotic_good',
     ChaoticNeutral = 'chaotic_neutral',
     ChaoticEvil = 'chaotic_evil',
+}
+
+export enum CharacterStatName {
+    Strength = 'Strength',
+    Dexterity= 'Dexterity',
+    Constitution= 'Constitution',
+    Intelligence= 'Intelligence',
+    Wisdom= 'Wisdom',
+    Charisma= 'Charisma',
 }
