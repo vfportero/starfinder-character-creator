@@ -21,6 +21,7 @@ function createActions(dispatch: React.Dispatch<any>) {
         setCharacterIniciative: (value?: number) => dispatch({type: SET_CHARACTER_INICIATIVE, payload: {value}}),
 
         saveCharacterToDb: (character: Character) => {
+            console.log(character);
             DatabaseService.commit(character).then(
                 (characterId) => {
                     dispatch({ type: SAVE_CHARACTER_TO_DB_SUCCESS, payload: characterId })

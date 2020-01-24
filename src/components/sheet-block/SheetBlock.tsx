@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import BlockTitle from '../block-title/BlockTitle';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: 8
+    },
     inner: {
         border: '1px solid',
         marginTop: -14,
@@ -23,7 +26,7 @@ const SheetBlock: React.FC<Props> = (props) => {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className={classes.root}>
             <BlockTitle Title={props.title} />
             <div className={classes.inner}>
                 {props.children}

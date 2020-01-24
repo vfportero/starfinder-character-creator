@@ -21,8 +21,8 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Audiowide',
-    fontSize: 13
-  }
+    fontSize: 12,
+  },
 });
 
 export default theme;

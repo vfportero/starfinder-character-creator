@@ -20,6 +20,10 @@ export interface Character {
     Charisma?: CharStat;
 
     Initiative?: CharInitiative;
+
+    StaminaPoints?: number;
+    HitPoints?: number;
+    ResolvePoints?: number;
 }
 
 export interface CharInitiative {

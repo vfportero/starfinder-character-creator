@@ -12,6 +12,7 @@ import { CharacterProvider } from '../../core/context/CharacterContext';
 import { Button, Snackbar, IconButton, ButtonGroup, Grid } from '@material-ui/core';
 import createActions from '../../core/context/characterActions';
 import CharacterInitiative from '../character-initiative/CharacterIniciative';
+import CharacterHealth from '../character-health/CharacterHealth';
 
 const useStyles = makeStyles(theme => ({
     characterSheet: {
@@ -37,8 +38,7 @@ const CharacterSheet: React.FC = () => {
 
 
     let save = () => {
-        console.log(state.character);
-        // actions.saveCharacterToDb(state.character);
+        actions.saveCharacterToDb(state.character);
     }
 
     const closeToast = () => {
@@ -58,6 +58,7 @@ const CharacterSheet: React.FC = () => {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <CharacterInitiative />
+                            <CharacterHealth />
                         </Grid>
                     </Grid>
 
