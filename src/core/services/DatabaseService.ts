@@ -9,7 +9,7 @@ class DatabaseService {
         this.firebaseRepository = firebase.firestore().collection('characters');
     }
     
-    async commit(character: Character) : Promise<string> {
+    async commitCharacter(character: Character) : Promise<string> {
         if (!this.firebaseRepository) {
             this.init();    
         }
@@ -17,10 +17,19 @@ class DatabaseService {
             return (await this.firebaseRepository.add(character)).id;
         } 
         
-        this.firebaseRepository.doc(character.Id).update(character);
+        await this.firebaseRepository.doc(character.Id).update(character);
         return character.Id;
-        
-        
+    }
+
+    async getCharacter(id: string) : Promise<Character> {
+        if (!this.firebaseRepository) {
+            this.init();    
+        }
+        const characterResponse = await this.firebaseRepository.doc(id).get();
+        if (characterResponse.exists) {
+            return characterResponse.data();
+        }
+        throw new Error(`Character with ${id} not found.`);
     }
 }
 

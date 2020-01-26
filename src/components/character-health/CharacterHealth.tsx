@@ -65,9 +65,9 @@ const CharacterInitiative: React.FC = () => {
                         type="number"
                         size="small"
                         color="secondary"
-                        onBlur={handleChange}
+                        onChange={handleChange}
                         name="StaminaPoints"
-                        defaultValue={character.StaminaPoints}
+                        value={character.StaminaPoints}
                     />    
                 </Grid>
                 <Grid item xs={3} >
@@ -77,9 +77,9 @@ const CharacterInitiative: React.FC = () => {
                         type="number"
                         size="small"
                         color="secondary"
-                        onBlur={handleChange}
+                        onChange={handleChange}
                         name="HitPoints"
-                        defaultValue={character.HitPoints}
+                        value={character.HitPoints}
                     />
                 </Grid>
                 <Grid item xs={3} >
@@ -89,9 +89,9 @@ const CharacterInitiative: React.FC = () => {
                         type="number"
                         size="small"
                         color="secondary"
-                        onBlur={handleChange}
+                        onChange={handleChange}
                         name="ResolvePoints"
-                        defaultValue={character.ResolvePoints}
+                        value={character.ResolvePoints}
                     />
                 </Grid>
             </Grid>

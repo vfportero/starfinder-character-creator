@@ -88,12 +88,14 @@ const CharacterStat: React.FC<CharacterStatModel> = (model) => {
                 size="small"
                 color="secondary"
                 className={classes.statValue}
-                onBlur={handleStatChange}
+                onChange={handleStatChange}
                 InputProps={{
                     classes: {
                         root: classes.mainStatValue
                     } 
                 }}
+                value={character[model.StatName]?.Value}
+                name={model.StatName}
             />
             <TextField 
                 variant="outlined"

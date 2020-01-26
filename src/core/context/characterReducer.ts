@@ -1,4 +1,4 @@
-import { Action, SET_CHARACTER_PROPERTY, SAVE_CHARACTER_TO_DB, SAVE_CHARACTER_TO_DB_SUCCESS, CLOSE_TOAST, SET_CHARACTER_STAT, SET_CHARACTER_INICIATIVE } from "./characterActions";
+import { Action, SET_CHARACTER_PROPERTY, POST_CHARACTER_SUCCESS, CLOSE_TOAST, SET_CHARACTER_STAT, SET_CHARACTER_INICIATIVE, POST_CHARACTER, GET_CHARACTER, GET_CHARACTER_SUCCESS } from "./characterActions";
 import { State } from "../models/State";
 import CharacterService from "../services/CharacterService";
 
@@ -44,12 +44,13 @@ export const characterReducer = (state: State, action: Action) => {
                 }
             }
         }
-        case SAVE_CHARACTER_TO_DB:
+        case POST_CHARACTER:
+        case GET_CHARACTER:
             return {
                 ...state,
                 loading: true
             };
-        case SAVE_CHARACTER_TO_DB_SUCCESS:
+        case POST_CHARACTER_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -61,6 +62,15 @@ export const characterReducer = (state: State, action: Action) => {
                     isOpen: true,
                     message: `Ficha de personaje guardada con éxito`
                 }
+        };
+        case GET_CHARACTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                character: {
+                    ...action.payload.Character,
+                    Id: action.payload.Id
+                },
             };
         case CLOSE_TOAST: 
             return {

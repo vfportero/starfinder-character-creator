@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../header/Header';
@@ -40,11 +40,15 @@ const CharacterSheet: React.FC<CharacterSheetModel> = (model: CharacterSheetMode
     const [state, dispatch] = useReducer(characterReducer, initialState);
     const actions = createActions(dispatch);
 
-    console.log(model?.Id);
+    useEffect(() => {
+        if (model.Id && !state.character.Id && state.loading === false) {
+            actions.getCharacter(model.Id);
+        }
+    }, [model.Id]);
 
 
     let save = () => {
-        actions.saveCharacterToDb(state.character);
+        actions.postCharacter(state.character);
     }
 
     const closeToast = () => {
@@ -75,10 +79,6 @@ const CharacterSheet: React.FC<CharacterSheetModel> = (model: CharacterSheetMode
                             disabled={state.loading}
                         >
                         Guardar</Button>
-                        <Button 
-                            startIcon={<GetAppIcon />}
-                            disabled
-                        > Cargar (TODO)</Button>
                     </ButtonGroup>
                 </form>
             

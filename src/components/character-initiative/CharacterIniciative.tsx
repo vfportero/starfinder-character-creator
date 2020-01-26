@@ -54,7 +54,7 @@ const CharacterInitiative: React.FC = () => {
 
     let handleChange = (e: any) => {
         if (e.target.value) {
-            actions.setCharacterIniciative(e.target.value);
+            actions.setCharacterIniciative(parseInt(e.target.value));
         }
         
     }
@@ -102,7 +102,9 @@ const CharacterInitiative: React.FC = () => {
                         type="number"
                         size="small"
                         color="secondary"
-                        onBlur={handleChange}
+                        onChange={handleChange}
+                        value={character.Initiative?.MiscModifier}
+                        name="MiscModifier"
                     />
                 </Grid>
             </Grid>
