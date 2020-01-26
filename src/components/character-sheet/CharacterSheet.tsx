@@ -29,12 +29,18 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
+interface CharacterSheetModel {
+    Id?: string;
+}
+  
 
-const CharacterSheet: React.FC = () => {
+const CharacterSheet: React.FC<CharacterSheetModel> = (model: CharacterSheetModel) => {
 
     const classes = useStyles();
     const [state, dispatch] = useReducer(characterReducer, initialState);
     const actions = createActions(dispatch);
+
+    console.log(model?.Id);
 
 
     let save = () => {
